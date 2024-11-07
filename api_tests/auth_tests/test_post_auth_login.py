@@ -20,7 +20,10 @@ class TestPostAuthLogin:
     fake = Faker()
 
     @allure.title("Получение токена, зарегистрированного пользователя")
-    def test_check_post_auth_valid_login(self, auth_api_client, set_user1_mail, set_user_pwd):
+    def test_check_post_auth_valid_login(self,
+                                         auth_api_client,
+                                         set_user1_mail,
+                                         set_user_pwd):
         response = auth_api_client.post_auth_login(params={
             "email": set_user1_mail,
             "password": set_user_pwd,
