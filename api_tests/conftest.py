@@ -4,6 +4,7 @@ from api_tests.auth_tests.routs import auth_api_routes
 from base.logger import logger
 from base.setup_manager import SetupManager
 
+
 @pytest.fixture(scope="session")
 def setup_manager():
     return SetupManager()
@@ -33,4 +34,16 @@ def get_user1_auth_token(set_url, set_user1_mail, set_user_pwd):
         return response.json()['auth_token']
     except KeyError:
         logger.error("auth_token not found in response")
+        return None
+
+@pytest.fixture
+def test_check_get_auth_users_me(set_url, get_user1_auth_token):
+    response = requests.get(
+        url = f'{set_url}{auth_api_routes["auth"]["get_users_me"]}',
+        json = {"token": get_user1_auth_token}
+    )
+    try:
+        return response.json()['id']
+    except KeyError:
+        logger.error("id not found in response")
         return None

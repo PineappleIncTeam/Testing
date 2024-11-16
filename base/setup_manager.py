@@ -20,3 +20,4 @@ class SetupManager:
 
     def get_user_pwd(self) -> str:
         return os.getenv("AUTOTEST_USER_PASS")
+
